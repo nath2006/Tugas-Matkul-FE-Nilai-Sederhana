@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan 2 Anatha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="auth">
+  <div class="bg-blob"></div>
+  <div class="bg-blob blob-2"></div>
+
+  <div class="card">
+    <h1 class="title">Form Nilai</h1>
+    <p class="subtitle">Masukan Data untuk melanjutkan</p>
+
+    <form id="formRegister" class="form">
+      <div class="field">
+        <input id="namaDepan" type="text" placeholder=" " required />
+        <label for="namaDepan">Nama Depan</label>
+      </div>
+      <div class="field">
+        <input id="namaBelakang" type="text" placeholder=" " required />
+        <label for="namaBelakang">Nama Belakang</label>
+      </div>
+      <div class="field">
+        <input id="nilai" type="number" placeholder=" " required />
+        <label for="nilai">Masukan Nilai</label>
+      </div>
+
+      <button class="btn" type="submit">Kirim</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('formRegister');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const namaDepan = document.getElementById('namaDepan').value;
+    const namaBelakang = document.getElementById('namaBelakang').value;
+    const nilaiAngka = document.getElementById('nilai').value;
+
+    let nilaiHuruf;
+    if (nilaiAngka >= 85 && nilaiAngka <= 100) {
+      nilaiHuruf = 'A';
+    } else if (nilaiAngka >= 80 && nilaiAngka < 85) {
+      nilaiHuruf = 'A-';
+    } else if (nilaiAngka >= 75 && nilaiAngka < 80) {
+      nilaiHuruf = 'B+';
+    } else if (nilaiAngka >= 70 && nilaiAngka < 75) {
+      nilaiHuruf = 'B';
+    } else if (nilaiAngka >= 65 && nilaiAngka < 70) {
+      nilaiHuruf = 'B-';
+    } else if (nilaiAngka >= 60 && nilaiAngka < 65) {
+      nilaiHuruf = 'C+';
+    } else if (nilaiAngka >= 55 && nilaiAngka < 60) {
+      nilaiHuruf = 'C';
+    } else if (nilaiAngka >= 40 && nilaiAngka < 55) {
+      nilaiHuruf = 'D';
+    } else if (nilaiAngka >= 0 && nilaiAngka < 40) {
+      nilaiHuruf = 'E';
+    } else {
+      nilaiHuruf = 'Nilai tidak valid';
+    }
+
+
+    const user = {
+      namaDepan: namaDepan,
+      namaBelakang: namaBelakang,
+      nilaiHuruf: nilaiHuruf
+    };
+
+    localStorage.setItem('userData', JSON.stringify(user));
+
+    alert(`Register Successfully!\n
+          Nama Depan : ${user.namaDepan} \n
+          Nama Belakang : ${user.namaBelakang} \n
+          Nilai : ${user.nilaiHuruf}`);
+
+    form.reset();
+  });
+</script>
+</body>
+</html>
